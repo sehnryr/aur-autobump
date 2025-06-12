@@ -13,10 +13,12 @@ jobs:
         pkg: [fdbcli-bin, fdbbackup-bin, fdbserver-bin, fdbmonitor-bin]
     steps:
       - name: Install dependencies
-        run: pacman -Sy --noconfirm --needed git jq nvchecker devtools
+        run: |
+          pacman -Sy --noconfirm --needed git jq nvchecker devtools
 
       - name: Get AUR SSH Public Keys
         run: |
+          install -dm 700 $HOME/.ssh
           ssh-keyscan aur.archlinux.org >>$HOME/.ssh/known_hosts
 
       - name: Write SSH Private Key
@@ -24,6 +26,7 @@ jobs:
           AUR_SSH_KEY: ${{ secrets.AUR_SSH_KEY }}
         run: |
           echo -e "${AUR_SSH_KEY//_/\\n}" >$HOME/.ssh/aur
+          chmod 600 $HOME/.ssh/aur
 
       - name: Set up Git
         run: |
