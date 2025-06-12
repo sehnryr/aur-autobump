@@ -35,6 +35,8 @@ jobs:
             IdentitiesOnly yes
           EOF
 
+          ssh -F $HOME/.ssh/config -vvv aur.archlinux.org
+
       - name: Set up Git
         run: |
           git config --global user.name "${{ secrets.AUR_USERNAME }}"
