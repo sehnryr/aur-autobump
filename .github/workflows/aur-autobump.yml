@@ -31,7 +31,7 @@ jobs:
             IdentitiesOnly yes
           EOF
 
-      - run: ssh -T aur@aur.archlinux.org
+          ssh -T aur@aur.archlinux.org
 
       - run: git clone "ssh://aur@aur.archlinux.org/${{ matrix.pkg }}.git" aur
 
