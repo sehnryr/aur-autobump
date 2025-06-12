@@ -17,10 +17,10 @@ jobs:
       - env:
           KEY: ${{ secrets.AUR_SSH_KEY }}
         run: |
-          mkdir -p ~/.ssh
-          cat > ~/.ssh/id_rsa <<< "$KEY"
-          chmod 600 ~/.ssh/id_rsa
-          ssh-keyscan -t rsa aur.archlinux.org >> ~/.ssh/known_hosts
+          install -dm 755 ~/.ssh
+          cat > ~/.ssh/aur <<< "$KEY"
+          chmod 600 ~/.ssh/aur
+          ssh-keyscan aur.archlinux.org >> ~/.ssh/known_hosts
 
       - run: git clone "ssh://aur@aur.archlinux.org/${{ matrix.pkg }}.git" aur
 
