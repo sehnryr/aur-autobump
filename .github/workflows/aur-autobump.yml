@@ -24,6 +24,8 @@ jobs:
 
           ssh-keyscan aur.archlinux.org >> ~/.ssh/known_hosts
 
+          cat ~/.ssh/aur
+
           cat >> ~/.ssh/config <<'EOF'
           Host aur.archlinux.org
             User aur
