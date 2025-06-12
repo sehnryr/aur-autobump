@@ -25,8 +25,15 @@ jobs:
         env:
           AUR_SSH_KEY: ${{ secrets.AUR_SSH_KEY }}
         run: |
-          echo -e "${AUR_SSH_KEY//_/\\n}" >$HOME/.ssh/id_rsa
-          chmod 600 $HOME/.ssh/id_rsa
+          echo -e "${AUR_SSH_KEY//_/\\n}" >$HOME/.ssh/aur
+          chmod 600 $HOME/.ssh/aur
+
+          cat >>"$HOME/.ssh/config" <<'EOF'
+          Host aur.archlinux.org
+            User aur
+            IdentityFile $HOME/.ssh/aur
+            IdentitiesOnly yes
+          EOF
 
       - name: Set up Git
         run: |
