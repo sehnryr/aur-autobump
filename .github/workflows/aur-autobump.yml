@@ -10,7 +10,7 @@ jobs:
     container: archlinux:latest
     strategy:
       matrix:
-        pkg: [fdbcli-bin]
+        pkg: [fdbcli-bin, fdbbackup-bin, fdbserver-bin, fdbmonitor-bin]
     steps:
       - run: pacman -Sy --noconfirm --needed git jq nvchecker devtools
 
