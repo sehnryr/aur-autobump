@@ -21,6 +21,12 @@ jobs:
           cat > ~/.ssh/aur <<< "$KEY"
           chmod 600 ~/.ssh/aur
           ssh-keyscan aur.archlinux.org >> ~/.ssh/known_hosts
+          cat >> ~/.ssh/config <<'EOF'
+          Host aur.archlinux.org
+            User aur
+            IdentityFile ~/.ssh/aur
+            IdentitiesOnly yes
+          EOF
 
       - run: git clone "ssh://aur@aur.archlinux.org/${{ matrix.pkg }}.git" aur
 
