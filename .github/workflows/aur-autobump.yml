@@ -15,12 +15,15 @@ jobs:
       - run: pacman -Sy --noconfirm --needed git jq nvchecker devtools
 
       - env:
-          KEY: ${{ secrets.AUR_SSH_KEY }}
+          AUR_SSH_KEY: ${{ secrets.AUR_SSH_KEY }}
         run: |
           install -dm 755 ~/.ssh
-          cat > ~/.ssh/aur <<< "$KEY"
+
+          printf '%s\n' "$AUR_SSH_KEY" > ~/.ssh/aur
           chmod 600 ~/.ssh/aur
+
           ssh-keyscan aur.archlinux.org >> ~/.ssh/known_hosts
+
           cat >> ~/.ssh/config <<'EOF'
           Host aur.archlinux.org
             User aur
