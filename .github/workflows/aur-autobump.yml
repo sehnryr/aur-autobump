@@ -10,7 +10,7 @@ jobs:
     container: archlinux:latest
     strategy:
       matrix:
-        pkg: [fdbcli-bin, fdbbackup-bin, fdbserver-bin, fdbmonitor-bin]
+        pkg: [fdbcli-bin, fdbbackup-bin, fdbserver-bin, fdbmonitor-bin, foundationdb-bin]
     steps:
       - name: Install dependencies
         run: |
